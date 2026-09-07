@@ -6,6 +6,16 @@ Notes are saved as "/tmp/note_name.txt". Every note begins with "note_", and is 
 
 Can also be called by executing "n".
 
+## Compile
+
+Requirements:
+- C++ Compiler for C++17 (g++)
+- CMake (cmake)
+
+```
+cmake --build build
+```
+
 ## Parameters
 
 - [ ] ls - Lists all notes

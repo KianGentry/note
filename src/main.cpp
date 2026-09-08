@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <string>
 
-const char* VERSION = "2";
+const char* VERSION = "1";
 
 void printHelp() {
     std::cout << "Usage: note [OPTION]\n";

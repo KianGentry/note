@@ -2,8 +2,31 @@
 #include <cstdlib>
 #include <string>
 #include <fstream>
+#include <sstream>
 
 const char* VERSION = "pre-release";
+const char* homeDir = std::getenv("HOME");
+
+std::string getConfigValue(const std::string key, const std::string defaultValue) {
+    if (!homeDir) return defaultValue;
+
+    std::string configPath = std::string(homeDir) + "/.config/noterc";
+    std::ifstream configFile(configPath);
+    if (!configFile.is_open()) return defaultValue;
+
+    std::string line;
+    while (std::getline(configFile, line)) {
+        std::istringstream iss(line);
+        std::string k;
+        std::string value;
+        if (std::getline(iss, k, '=') && std::getline(iss, value)) {
+            if (k == key) {
+                return value;
+            }
+        }
+    }
+    return defaultValue;
+}
 
 void printVersion() {
     std::cout << "Program version " << VERSION << "\n";
@@ -35,11 +58,12 @@ std::string newUnnamedNoteName() {
 }
 
 void newNote(const std::string& noteName) {
+    std::string editor = getConfigValue("textEditor", "nano");
     if (!noteName.empty()) {
-        std::system(("nano /tmp/note_" + noteName + ".txt").c_str());
+        std::system((editor + " /tmp/note_" + noteName + ".txt").c_str());
     }
     else {
-        std::system(("nano " + newUnnamedNoteName()).c_str());
+        std::system((editor + " " + newUnnamedNoteName()).c_str());
     }
 }
 

@@ -16,12 +16,12 @@ void listNotes() {
     std::system("ls -a /tmp | grep note_");
 }
 
-void returnLatestUnnamedNote() {
+void returnLatestUnnamedNoteIndex() {
     std::system("ls -a /tmp | grep note_ | tail -n 1 | cut -d '_' -f 2 | cut -d '.' -f1");
 }
 
 void new_note() {
-    returnLatestUnnamedNote();
+    returnLatestUnnamedNoteIndex();
     //std::string command = "nano /tmp/note_" + (std::to_string(return_latest_note() + 1));
     //std::system(command.c_str());
 }

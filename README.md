@@ -18,7 +18,7 @@ cmake --build build
 
 ## Parameters
 
-- [ ] ls - Lists all notes
+- [x] ls - Lists all notes
 - [x] help - Prints help information
 - [ ] grep [arg] || "arg" - Searches /tmp/ for notes based on query (note name or content)
 - [ ] print [arg] - Prints note contents to terminal (most recent if no arg)

@@ -34,13 +34,18 @@ std::string newNoteName() {
     return "/tmp/note_" + std::to_string(latestIndex + 1) + ".txt";
 }
 
-void newNote() {
-    std::system(("nano " + newNoteName()).c_str());
+void newNote(const std::string& noteName) {
+    if (!noteName.empty()) {
+        std::system(("nano /tmp/note_" + noteName + ".txt").c_str());
+    }
+    else {
+        std::system(("nano " + newNoteName()).c_str());
+    }
 }
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
-        newNote();
+        newNote("");
     }
     else if (std::string(argv[1]) == "-h" || std::string(argv[1]) == "help") {
         printHelp();
@@ -52,8 +57,7 @@ int main(int argc, char* argv[]) {
         listNotes();
     }
     else {
-        std::cout << "Unknown option: " << argv[1] << "\n";
-        printHelp();
+        newNote(std::string(argv[1]));
     }
     return 0;
 }

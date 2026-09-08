@@ -12,8 +12,13 @@ Requirements:
 - C++ Compiler for C++17 (g++)
 - CMake (cmake)
 
+To compile:
 ```
 cmake --build build
+```
+To install to /usr/bin/:
+```
+sudo cmake --install build
 ```
 
 ## Parameters

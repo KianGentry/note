@@ -29,7 +29,7 @@ int returnLatestUnnamedNoteIndex() {
     return index;
 }
 
-std::string newNoteName() {
+std::string newUnnamedNoteName() {
     int latestIndex = returnLatestUnnamedNoteIndex();
     return "/tmp/note_" + std::to_string(latestIndex + 1) + ".txt";
 }
@@ -39,7 +39,7 @@ void newNote(const std::string& noteName) {
         std::system(("nano /tmp/note_" + noteName + ".txt").c_str());
     }
     else {
-        std::system(("nano " + newNoteName()).c_str());
+        std::system(("nano " + newUnnamedNoteName()).c_str());
     }
 }
 

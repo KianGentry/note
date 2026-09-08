@@ -1,11 +1,10 @@
 #include <iostream>
-#include <string>
 #include <cstdlib>
+#include <string>
 
-const char* VERSION = "1";
-std::string tmp_name = "/tmp/note_";
+const char* VERSION = "2";
 
-void print_help() {
+void printHelp() {
     std::cout << "Usage: note [OPTION]\n";
     std::cout << "Options:\n";
     std::cout << "  -h, --help     Show this help message\n";
@@ -13,23 +12,36 @@ void print_help() {
     std::cout << "  -l, --list     List all notes\n";
 }
 
-void list_notes() {
+void listNotes() {
     std::system("ls -a /tmp | grep note_");
 }
 
+void returnLatestUnnamedNote() {
+    std::system("ls -a /tmp | grep note_ | tail -n 1 | cut -d '_' -f 2 | cut -d '.' -f1");
+}
+
+void new_note() {
+    returnLatestUnnamedNote();
+    //std::string command = "nano /tmp/note_" + (std::to_string(return_latest_note() + 1));
+    //std::system(command.c_str());
+}
+
 int main(int argc, char* argv[]) {
-    if (argc < 2 || std::string(argv[1]) == "-h" || std::string(argv[1]) == "--help") {
-        print_help();
+    if (std::string(argv[1]) == "-h" || std::string(argv[1]) == "--help") {
+        printHelp();
     }
     else if (std::string(argv[1]) == "-v" || std::string(argv[1]) == "--version") {
         std::cout << "Program version " << VERSION << "\n";
     } 
     else if (std::string(argv[1]) == "-l" || std::string(argv[1]) == "--list") {
-        list_notes();
+        listNotes();
+    }
+    else if (std::string(argv[1]) == "-n" || std::string(argv[1]) == "--new" || argv[1] == nullptr) {
+        new_note();
     }
     else {
         std::cout << "Unknown option: " << argv[1] << "\n";
-        print_help();
+        printHelp();
     }
     return 0;
 }

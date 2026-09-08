@@ -20,7 +20,7 @@ void returnLatestUnnamedNoteIndex() {
     std::system("ls -a /tmp | grep note_ | tail -n 1 | cut -d '_' -f 2 | cut -d '.' -f1");
 }
 
-void new_note() {
+void newNote() {
     returnLatestUnnamedNoteIndex();
     //std::string command = "nano /tmp/note_" + (std::to_string(return_latest_note() + 1));
     //std::system(command.c_str());
@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
         listNotes();
     }
     else if (std::string(argv[1]) == "-n" || std::string(argv[1]) == "--new" || argv[1] == nullptr) {
-        new_note();
+        newNote();
     }
     else {
         std::cout << "Unknown option: " << argv[1] << "\n";

@@ -50,6 +50,18 @@ std::string getMostRecentNote() {
     return "";
 }
 
+void printNote(const std::string& noteName) {
+    if (!noteName.empty()) {
+        std::system(("cat /tmp/note_" + noteName + ".txt").c_str());
+    }
+    else {
+        std::string recentNote = getMostRecentNote();
+        if (!recentNote.empty()) {
+            std::system(("cat /tmp/" + recentNote).c_str());
+        }
+    }
+}
+
 void rmNote(const std::string& noteName) {
     if (!noteName.empty()) {
         std::system(("rm /tmp/note_" + noteName + ".txt").c_str());
@@ -120,6 +132,9 @@ int main(int argc, char* argv[]) {
     }
     else if (std::string(argv[1]) == "-r" || std::string(argv[1]) == "rm" || std::string(argv[1]) == "remove") {
         rmNote(argc > 2 ? std::string(argv[2]) : "");
+    }
+    else if (std::string(argv[1]) == "-p" || std::string(argv[1]) == "print" || std::string(argv[1]) == "cat" || std::string(argv[1]) == "echo") {
+        printNote(argc > 2 ? std::string(argv[2]) : "");
     }
     else {
         newNote(std::string(argv[1]));

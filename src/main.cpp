@@ -41,11 +41,13 @@ void printHelp() {
 }
 
 std::string getMostRecentNote() {
-    std::string cmd = "ls -t /tmp | grep note_ | head -n 1";
+    std::system("ls -t /tmp | grep note_ | head -n 1 > /tmp/.noterecent");
     std::ifstream infile("/tmp/.noterecent");
     std::string recentNote;
-    infile >> recentNote;
-    return recentNote;
+    if (infile >> recentNote) {
+        return recentNote;
+    }
+    return "";
 }
 
 void rmNote(const std::string& noteName) {

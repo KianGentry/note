@@ -48,6 +48,18 @@ std::string getMostRecentNote() {
     return recentNote;
 }
 
+void rmNote(const std::string& noteName) {
+    if (!noteName.empty()) {
+        std::system(("rm /tmp/note_" + noteName + ".txt").c_str());
+    }
+    else {
+        std::string recentNote = getMostRecentNote();
+        if (!recentNote.empty()) {
+            std::system(("rm /tmp/" + recentNote).c_str());
+        }
+    }
+}
+
 void listNotes() {
     std::system("ls -a /tmp | grep note_");
 }

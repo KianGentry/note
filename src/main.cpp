@@ -60,6 +60,19 @@ void rmNote(const std::string& noteName) {
     }
 }
 
+void openNote(const std::string& noteName) {
+    std::string editor = getConfigValue("textEditor", "nano");
+    if (!noteName.empty()) {
+        std::system((editor + " /tmp/note_" + noteName + ".txt").c_str());
+    }
+    else {
+        std::string recentNote = getMostRecentNote();
+        if (!recentNote.empty()) {
+            std::system((editor + " /tmp/" + recentNote).c_str());
+        }
+    }
+}
+
 void listNotes() {
     std::system("ls -a /tmp | grep note_");
 }

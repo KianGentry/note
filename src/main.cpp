@@ -110,8 +110,14 @@ int main(int argc, char* argv[]) {
     else if (std::string(argv[1]) == "-v" || std::string(argv[1]) == "version") {
         printVersion();
     } 
-    else if (std::string(argv[1]) == "-l" || std::string(argv[1]) == "list") {
+    else if (std::string(argv[1]) == "-l" || std::string(argv[1]) == "list" || std::string(argv[1]) == "ls") {
         listNotes();
+    }
+    else if (std::string(argv[1]) == "-o" || std::string(argv[1]) == "open") {
+        openNote(argc > 2 ? std::string(argv[2]) : "");
+    }
+    else if (std::string(argv[1]) == "-r" || std::string(argv[1]) == "rm" || std::string(argv[1]) == "remove") {
+        rmNote(argc > 2 ? std::string(argv[2]) : "");
     }
     else {
         newNote(std::string(argv[1]));

@@ -40,6 +40,14 @@ void printHelp() {
     std::cout << "  -l, --list     List all notes\n";
 }
 
+std::string getMostRecentNote() {
+    std::string cmd = "ls -t /tmp | grep note_ | head -n 1";
+    std::ifstream infile("/tmp/.noterecent");
+    std::string recentNote;
+    infile >> recentNote;
+    return recentNote;
+}
+
 void listNotes() {
     std::system("ls -a /tmp | grep note_");
 }
